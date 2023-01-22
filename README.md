@@ -12,7 +12,7 @@
 
   The company that proposed theis use case is a world leader in pill inspection systems for the pharmaceutical Industry. Its machines aim to eliminate the defects created by medication production lines: broken pills, stains, discolorations, printing or engraving problems. The defects targeted are of the order of 100 microns for the smallest ones. To perform this operation, the tablets are in single file on conveyors and cameras take color and 3D images of each drug. By image processing, they perform a real-time analysis to determine in real time if the tablet is good or bad. In the latter case, this machine eject the defective tablet from the production flow. The equipment allow them to reach very high production rates of 160 to 200 tablets per second for machines equipped with two inspection lines.
 
-<h1> $\textcolor{brown}{\text{II. project objectives :}}$ </h1>
+<h1> $\textcolor{brown}{\text{II. Project objectives :}}$ </h1>
 
   In the context of AI-based in-line control of pharmaceutical tablets, the objective is to succeed in using Deep Learning models to correctly classify the images according to the type of defect present and to reduce the false detection rate compared to compared to conventional image processing. 
 A powerful model has been developed this company with its collaborators and gives very good results with an accuracy of about 99.7%, however to reach this figure the model needs to be trained with 30,000 tablet images. Nevertheless, in order to reach this figure, the model needs to be trained with 30 000 images of tablets
@@ -40,14 +40,14 @@ Lower belt: A second belt allows the rotation and transports the tablets to the 
 
 >image
 
-<h2> $\textcolor{Orange}{\text{II.2 Vision stations :}$ </h2>
+<h2> $\textcolor{Orange}{\text{II.2 Vision stations :}}$ </h2>
 
 One line of the equipment has 2 RGB stations (each consisting of 5 matrix cameras) and 2 linear laser profilometers used to detect any type of aspect defects. 
 - The 5 cameras and the laser placed on the upper belt are used to inspect the first side of the tablets.
 - The 5 cameras and the laser placed on the lower belt are used to inspect the other side of the tablets - The 5 cameras and the laser placed on the lower belt are used to inspect the other side of the tablets after the tablets are turned over.
 - Two ejection stations, one at the top and one at the bottom, blowing air, are used to reject the tablets as soon as as soon as one of the stations detects a defect. If a tablet is considered to be in conformity by all If a tablet is considered compliant by all the vision stations, it will be collected at the exit of the conveyor in a specific container.
 
-<h2> $\textcolor{Orange}{\text{II.2 RGB station from which the images are taken :}$ </h2>
+<h2> $\textcolor{Orange}{\text{II.3 RGB station from which the images are taken :}}$ </h2>
 
 The RGB stations are composed of 5 matrix cameras trigged at the time when the tablet passes under the station, each of the two stations of the machine allows to have images of one side of the tablet. Pass under the station, each of the two stations of the machine allows to have images of a face of tablet (top of the tablet and the 4 upper corners for the station located on the upper belt and the bottom of the tablet and the 4 lower corners for the station located on the lower belt)
 
@@ -57,6 +57,54 @@ When a tablet passes under an RGB station, 5 images of the face are taken in off
 
 >Image
 
+<h2> $\textcolor{Orange}{\text{II.4 Organization of training and test images  :}}$ </h2>
 
+The images are taken on the 5 cameras and organized according to the type of defect and its severity: 
 
- 
+Types of defects:
+>Image 
+>Image
+>Image
+>Image
+>Image
+
+Severity of defects: 
+
+Class  |  explanation |
+--- | --- |
+Class I | High risk of complaint and risk of impact on the patient |
+Class II | Risk of complaint, no risk for the patient |
+Control | Low risk of complaint, no risk to the patient |
+
+>Image
+
+<h1> $\textcolor{brown}{\text{III. building the model :}}$ </h1>
+<h2> $\textcolor{Orange}{\text{III.1 Model for detecting the six types of defects :}}$ </h2>
+<h3> $\textcolor{BurntOrange}{\text{III.1.1 Approach :}}$ </h3>
+Our approach was to build a model from scratch and compare it with pre-established models in <a href="https://www.tensorflow.org/api_docs/python/tf/keras">Module TENSORFLOW KERAS</a> in order to detect the six type of defects without detecting the 3 classes of defects. 
+
+the best model is the result of simulation of several models (by experiment). this model is feeded with data from <a href="https://www.analyticsvidhya.com/blog/2020/08/image-augmentation-on-the-fly-using-keras-imagedatagenerator/">ImageDataGenerator class </a> that provides a quick and easy way to augment your images. It provides, in addition,  a host of different augmentation techniques like standardization, rotation, shifts, flips, brightness change, and many more. 
+However, the main benefit of using the Keras ImageDataGenerator class is that it is designed to provide real-time data augmentation. Meaning it is generating augmented images on the fly while our model is still in the training stage. How cool is that!
+
+We detect that our data are unbalanced because the type **Good** has 400 images and other types has 500 images. this imbalance effected our result so we use class weights balance our dataset.
+
+<h3> $\textcolor{BurntOrange}{\text{III.1.2 Results :}}$ </h3>
+
+the result can be summarized as follows 
+
+>Image
+>Image 
+>Image 
+
+>__interpretation :__
+>
+>It's difficult to have a good result (greater than 90%) with this number of dataset giving from this client with classical method of data augmentation (rotation, shifts, flips ...).
+
+<h2> $\textcolor{Orange}{\text{III.2 Model for detecting the six types of defects and the 3 classes of defects (16 classes) :}}$ </h2>
+this model will be shared with you after finishing the notebook. 
+
+<h2> $\textcolor{Orange}{\text{III.3 Perspectives for the development of the model :}}$ </h2>
+
+- Using new techniques of data augmentation like generative adversarial networks.
+- Using a transfert learning using model trained by 30,000 images and add some layers to specific tablets. 
+
