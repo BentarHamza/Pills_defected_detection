@@ -113,7 +113,7 @@ the best model is the result of simulation of several models (by experiment). th
 However, the main benefit of using the Keras ImageDataGenerator class is that it is designed to provide real-time data augmentation. Meaning it is generating augmented images on the fly while our model is still in the training stage. How cool is that!
 
 <p align="center">
-<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/BestModel.PNG>
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/BestModel.PNG">
 </p>
 
 We detect that our data are unbalanced because the type **Good** has 400 images and other types has 500 images. this imbalance effected our result so we use class weights balance our dataset.
