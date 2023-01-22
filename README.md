@@ -1,10 +1,12 @@
 <h1 align="center"> Classification of pills according to production deficiency</h1>
 <h2 align="center">See what the human cannot see </h2>
 
->Image
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/Firstpicture.PNG">
+</p>
 
 > __Note__
-> About the project.
+> About this project.
 >
 > this project is realized in a workshop in the presence of companies that offer real problems from the professional field to the participants in order to approach the real professional world to them.
 
@@ -25,20 +27,26 @@ So, the objective of this work is to achieve the same result with only 1000 imag
 <h2> $\textcolor{Orange}{\text{II.1 Overall view of the machine}}$ </h2>
 You will find below the operating principle of the high speed visual inspection and classification machine for pharmaceutical tablets 
 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/PrincipeFonctionnement.PNG">
+</p>
 
->image
 
 It is composed of the following subsystems: 
 
 Top belt : A belt transports the tablets from the feeding device to the tablet turning system. 
 
->image 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/uperbelt.PNG">
+</p>
 
 Turning System: The tablets are turned using a wheel, the upper belt transports the tablets and holds them against the lower belt during the rotation and at the end of the rotation the tablets remain on the lower belt.
 
 Lower belt: A second belt allows the rotation and transports the tablets to the exit. 
 
->image
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/lowerbelt.PNG">
+</p>
 
 <h2> $\textcolor{Orange}{\text{II.2 Vision stations :}}$ </h2>
 
@@ -51,22 +59,38 @@ One line of the equipment has 2 RGB stations (each consisting of 5 matrix camera
 
 The RGB stations are composed of 5 matrix cameras trigged at the time when the tablet passes under the station, each of the two stations of the machine allows to have images of one side of the tablet. Pass under the station, each of the two stations of the machine allows to have images of a face of tablet (top of the tablet and the 4 upper corners for the station located on the upper belt and the bottom of the tablet and the 4 lower corners for the station located on the lower belt)
 
->Image 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/PBG%20.PNG">
+</p> 
 
 When a tablet passes under an RGB station, 5 images of the face are taken in offset, this in order to be able to switch on the right lighting for each view. 
 
->Image
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/PBG%20.PNG">
+</p> 
 
 <h2> $\textcolor{Orange}{\text{II.4 Organization of training and test images  :}}$ </h2>
 
 The images are taken on the 5 cameras and organized according to the type of defect and its severity: 
 
 Types of defects:
->Image 
->Image
->Image
->Image
->Image
+
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/Coating_Defects.PNG">
+</p> 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/Edge_defects.PNG">
+</p> 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/chip_broken_coated.PNG">
+</p> 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/chip_broken_uncoated.PNG">
+</p> 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/logo_defects.PNG">
+</p>
+ 
 
 Severity of defects: 
 
@@ -76,7 +100,9 @@ Class I | High risk of complaint and risk of impact on the patient |
 Class II | Risk of complaint, no risk for the patient |
 Control | Low risk of complaint, no risk to the patient |
 
->Image
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/class_defect.PNG">
+</p>
 
 <h1> $\textcolor{brown}{\text{III. building the model :}}$ </h1>
 <h2> $\textcolor{Orange}{\text{III.1 Model for detecting the six types of defects :}}$ </h2>
@@ -86,15 +112,27 @@ Our approach was to build a model from scratch and compare it with pre-establish
 the best model is the result of simulation of several models (by experiment). this model is feeded with data from <a href="https://www.analyticsvidhya.com/blog/2020/08/image-augmentation-on-the-fly-using-keras-imagedatagenerator/">ImageDataGenerator class </a> that provides a quick and easy way to augment your images. It provides, in addition,  a host of different augmentation techniques like standardization, rotation, shifts, flips, brightness change, and many more. 
 However, the main benefit of using the Keras ImageDataGenerator class is that it is designed to provide real-time data augmentation. Meaning it is generating augmented images on the fly while our model is still in the training stage. How cool is that!
 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/BestModel.PNG>
+</p>
+
 We detect that our data are unbalanced because the type **Good** has 400 images and other types has 500 images. this imbalance effected our result so we use class weights balance our dataset.
 
 <h3> $\textcolor{BurntOrange}{\text{III.1.2 Results :}}$ </h3>
 
 the result can be summarized as follows 
 
->Image
->Image 
->Image 
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/accuracy.PNG">
+</p>
+
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/loss.PNG">
+</p>
+
+<p align="center">
+<img src ="https://github.com/BentarHamza/Pills_defected_detection/blob/main/Photo/confusionMatrix.PNG">
+</p>
 
 >__interpretation :__
 >
