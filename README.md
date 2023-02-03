@@ -10,6 +10,23 @@
 >
 > this project is realized in a workshop in the presence of companies that offer real problems from the professional field to the participants in order to approach the real professional world to them.
 
+--------------------------------------
+<h1 align="center"> Summary </h1>
+
+## I. context of this project 
+## II. Project objectives 
+### II.1 Overall view of the machine
+### II.2 Vision stations 
+### II.3 RGB station from which the images are taken 
+### II.4 Organization of training and test images  
+## III. building the model 
+### III.1 Model for detecting the six types of defects 
+#### III.1.1 Approach 
+#### III.1.2 Results 
+### III.2 Model for detecting the six types of defects and the 3 classes of defects (16 classes) 
+### III.3 Perspectives for the development of the model 
+------------------------------------
+
 # I. context of this project :
 
   The company that proposed theis use case is a world leader in pill inspection systems for the pharmaceutical Industry. Its machines aim to eliminate the defects created by medication production lines: broken pills, stains, discolorations, printing or engraving problems. The defects targeted are of the order of 100 microns for the smallest ones. To perform this operation, the tablets are in single file on conveyors and cameras take color and 3D images of each drug. By image processing, they perform a real-time analysis to determine in real time if the tablet is good or bad. In the latter case, this machine eject the defective tablet from the production flow. The equipment allow them to reach very high production rates of 160 to 200 tablets per second for machines equipped with two inspection lines.
